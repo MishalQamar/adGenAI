@@ -1,3 +1,4 @@
+import { CreditBadge } from '@/components/credit-badge';
 import { AppSidebar } from '@/components/dashboard/app-sidebar';
 import { ThemeToggle } from '@/components/shared/theme-toggle';
 
@@ -21,6 +22,7 @@ export default function PrivateLayoutPage({
           <SidebarTrigger className="-ml-1" />
           <div className="ml-auto">
             <div className="flex items-center gap-3">
+              <CreditBadge />
               <ThemeToggle />
               <UserButton />
             </div>

@@ -27,8 +27,8 @@ const items = [
     icon: LayoutDashboard,
   },
   {
-    title: 'Image Generation',
-    url: '/image-generation',
+    title: 'Image Generator',
+    url: '/image-generator',
     icon: ImageIcon,
   },
   {

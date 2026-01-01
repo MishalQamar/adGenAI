@@ -5,6 +5,7 @@ import { ThemeProvider } from 'next-themes';
 import { ClerkProvider } from '@clerk/nextjs';
 import ConvexClientProvider from '@/components/providers/convex-client-provider';
 import { shadcn } from '@clerk/themes';
+import { Toaster } from '@/components/ui/toaster';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -40,6 +41,7 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               {children}
+              <Toaster />
             </ThemeProvider>
           </ConvexClientProvider>
         </ClerkProvider>
