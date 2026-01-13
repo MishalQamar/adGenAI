@@ -12,8 +12,16 @@ import type * as characters_actions from "../characters/actions.js";
 import type * as characters_mutations from "../characters/mutations.js";
 import type * as characters_queries from "../characters/queries.js";
 import type * as http from "../http.js";
+import type * as image_generations_actions from "../image_generations/actions.js";
+import type * as image_generations_mutations from "../image_generations/mutations.js";
+import type * as image_generations_queries from "../image_generations/queries.js";
+import type * as lib_kie from "../lib/kie.js";
+import type * as lib_openai from "../lib/openai.js";
 import type * as script from "../script.js";
 import type * as users from "../users.js";
+import type * as video_generations_actions from "../video_generations/actions.js";
+import type * as video_generations_mutations from "../video_generations/mutations.js";
+import type * as video_generations_queries from "../video_generations/queries.js";
 
 import type {
   ApiFromModules,
@@ -26,8 +34,16 @@ declare const fullApi: ApiFromModules<{
   "characters/mutations": typeof characters_mutations;
   "characters/queries": typeof characters_queries;
   http: typeof http;
+  "image_generations/actions": typeof image_generations_actions;
+  "image_generations/mutations": typeof image_generations_mutations;
+  "image_generations/queries": typeof image_generations_queries;
+  "lib/kie": typeof lib_kie;
+  "lib/openai": typeof lib_openai;
   script: typeof script;
   users: typeof users;
+  "video_generations/actions": typeof video_generations_actions;
+  "video_generations/mutations": typeof video_generations_mutations;
+  "video_generations/queries": typeof video_generations_queries;
 }>;
 
 /**

@@ -1,5 +1,5 @@
 import { query } from '../_generated/server';
-import { getCurrentUserOrThrow } from '../users';
+import { getCurrentUser } from '../users';
 
 export const listSystemCharacters = query({
   args: {},
@@ -16,7 +16,12 @@ export const listSystemCharacters = query({
 export const listUserCharacters = query({
   args: {},
   handler: async (ctx) => {
-    const user = await getCurrentUserOrThrow(ctx);
+    const user = await getCurrentUser(ctx);
+    
+    // If user is not authenticated or doesn't exist in Convex yet, return empty array
+    if (!user) {
+      return [];
+    }
 
     const characters = await ctx.db
       .query('characters')

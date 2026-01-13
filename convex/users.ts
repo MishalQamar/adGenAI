@@ -68,3 +68,43 @@ async function userByExternalId(ctx: QueryCtx, externalId: string) {
     .withIndex('by_clerk_id', (q) => q.eq('clerkId', externalId))
     .unique();
 }
+
+export const deductCredits = internalMutation({
+  args: {
+    clerkId: v.string(),
+    amount: v.number(),
+  },
+  handler: async (ctx, { clerkId, amount }) => {
+    const user = await userByExternalId(ctx, clerkId);
+    if (!user) {
+      throw new Error('User not found');
+    }
+    const currentCredits = user.credits ?? 0;
+
+    if (currentCredits < amount) {
+      throw new Error('Insufficient credits');
+    }
+    await ctx.db.patch(user._id, {
+      credits: currentCredits - amount,
+      updatedAt: Date.now(),
+    });
+  },
+});
+
+export const refundCredits = internalMutation({
+  args: {
+    clerkId: v.string(),
+    amount: v.number(),
+  },
+  handler: async (ctx, { clerkId, amount }) => {
+    const user = await userByExternalId(ctx, clerkId);
+    if (!user) {
+      throw new Error('User not found');
+    }
+    const currentCredits = user.credits ?? 0;
+    await ctx.db.patch(user._id, {
+      credits: currentCredits + amount,
+      updatedAt: Date.now(),
+    });
+  },
+});
