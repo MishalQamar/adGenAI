@@ -32,3 +32,57 @@ export const getRecent = query({
     return videos;
   },
 });
+
+export const getPaginatedVideos = query({
+  args: {
+    paginationOpts: v.any(),
+  },
+  handler: async (ctx, { paginationOpts }) => {
+    const paginatedVideos = await ctx.db
+      .query('videoGenerations')
+      .withIndex('by_status', (q) => q.eq('status', 'success'))
+      .order('desc')
+      .paginate(paginationOpts);
+
+    // collect all unique ids we saw
+    const uniqueUserIds = [
+      ...new Set(
+        paginatedVideos.page.map((generation) => generation.userId)
+      ),
+    ];
+
+    //batch fetch all users in parallel using index
+    const users = await Promise.all(
+      uniqueUserIds.map((userId) =>
+        ctx.db
+          .query('users')
+
+          .withIndex('by_clerk_id', (q) => q.eq('clerkId', userId))
+          .first()
+      )
+    );
+
+    //lookup map for access
+    const userMap = new Map(
+      users.map((user) => [user!.clerkId, user])
+    );
+
+    //combine generations with user details
+
+    const enrichedVideos = paginatedVideos.page.map((generation) => {
+      const user = userMap.get(generation.userId);
+      return {
+        ...generation,
+        user: {
+          name: user?.name,
+          imageUrl: user?.imageUrl,
+        },
+      };
+    });
+
+    return {
+      ...paginatedVideos,
+      page: enrichedVideos,
+    };
+  },
+});
