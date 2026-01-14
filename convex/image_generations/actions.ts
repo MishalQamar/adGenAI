@@ -1,8 +1,10 @@
-import { action } from '../_generated/server';
+'use node';
+
+import { action, internalAction } from '../_generated/server';
 import { v } from 'convex/values';
 import { createImageWithKie } from '../lib/kie';
 
-import { internal } from '../_generated/api';
+import { api, internal } from '../_generated/api';
 
 export const generate = action({
   args: {
@@ -59,5 +61,24 @@ export const generate = action({
     );
 
     return { success: true, taskId: taskId };
+  },
+});
+
+export const uploadImage = internalAction({
+  args: {
+    fileUrl: v.string(),
+    fileName: v.string(),
+    folderPath: v.string(),
+  },
+  handler: async (ctx, args): Promise<unknown> => {
+    const result = await ctx.runAction(
+      api.lib.imagekit.uploadImageToImageKit,
+      {
+        fileUrl: args.fileUrl,
+        fileName: args.fileName,
+        folderPath: args.folderPath,
+      }
+    );
+    return result;
   },
 });

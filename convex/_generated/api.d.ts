@@ -15,6 +15,7 @@ import type * as http from "../http.js";
 import type * as image_generations_actions from "../image_generations/actions.js";
 import type * as image_generations_mutations from "../image_generations/mutations.js";
 import type * as image_generations_queries from "../image_generations/queries.js";
+import type * as lib_imagekit from "../lib/imagekit.js";
 import type * as lib_kie from "../lib/kie.js";
 import type * as lib_openai from "../lib/openai.js";
 import type * as script from "../script.js";
@@ -37,6 +38,7 @@ declare const fullApi: ApiFromModules<{
   "image_generations/actions": typeof image_generations_actions;
   "image_generations/mutations": typeof image_generations_mutations;
   "image_generations/queries": typeof image_generations_queries;
+  "lib/imagekit": typeof lib_imagekit;
   "lib/kie": typeof lib_kie;
   "lib/openai": typeof lib_openai;
   script: typeof script;

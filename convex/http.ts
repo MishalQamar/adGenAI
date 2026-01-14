@@ -42,10 +42,6 @@ http.route({
   method: 'POST',
   handler: httpAction(async (ctx, request) => {
     const payload = await request.json();
-    console.log(
-      'KIE webhook payload:',
-      JSON.stringify(payload, null, 2)
-    );
 
     const { taskId, state, resultJson, failCode, failMsg } =
       payload.data;
@@ -62,29 +58,29 @@ http.route({
           JSON.stringify(result, null, 2)
         );
 
-        // Try different possible field names for the image URL
-        const imageUrl =
-          result.resultUrls?.[0] || result.resultUrl || result.url;
+        const imageUrl = result.resultUrls?.[0];
+        let finalUrl = imageUrl;
+        const filename = `${taskId}.png`;
 
-        if (!imageUrl) {
-          console.error('No image URL found in result:', result);
-          return new Response('No image URL in result', {
-            status: 400,
-          });
-        }
+        const folderPath = 'image_generations';
+
+        const uploadResult = await ctx.runAction(
+          internal.image_generations.actions.uploadImage,
+          {
+            fileUrl: finalUrl,
+            fileName: filename,
+            folderPath: folderPath,
+          }
+        );
+        finalUrl = uploadResult.url;
 
         await ctx.runMutation(
           internal.image_generations.mutations.update,
           {
             externalJobId: taskId,
             status: 'success',
-            resultsImageUrls: imageUrl,
+            resultsImageUrls: finalUrl,
           }
-        );
-
-        console.log(
-          'Image generation updated successfully with URL:',
-          imageUrl
         );
       } catch (error) {
         console.error('Error processing success webhook:', error);
@@ -126,6 +122,93 @@ http.route({
       await ctx.runMutation(internal.users.refundCredits, {
         clerkId: imageGeneration.userId,
         amount: imageGeneration.creditsUsage,
+      });
+    }
+
+    return new Response(null, { status: 200 });
+  }),
+});
+
+http.route({
+  path: '/webhook/kie-video',
+  method: 'POST',
+  handler: httpAction(async (ctx, request) => {
+    const payload = await request.json();
+
+    const { code, data, msg } = payload;
+    const { taskId } = data;
+
+    if (!taskId) {
+      return new Response('Missing taskId', { status: 400 });
+    }
+
+    if (code == 200) {
+      try {
+        const { info } = data;
+
+        const imageUrl = info.resultUrls[0];
+        let finalUrl = imageUrl;
+        const filename = `${taskId}.mp4`;
+
+        const folderPath = 'video_generations';
+
+        const uploadResult = await ctx.runAction(
+          internal.image_generations.actions.uploadImage,
+          {
+            fileUrl: finalUrl,
+            fileName: filename,
+            folderPath: folderPath,
+          }
+        );
+        finalUrl = uploadResult.url;
+
+        await ctx.runMutation(
+          internal.video_generations.mutations.update,
+          {
+            externalJobId: taskId,
+            status: 'success',
+            resultsVideoUrls: finalUrl,
+          }
+        );
+      } catch (error) {
+        console.error('Error processing success webhook:', error);
+        return new Response('Error processing webhook', {
+          status: 500,
+        });
+      }
+    } else {
+      const errorMessage =
+        msg ||
+        `Failed to generate video with code: ${code}` ||
+        'Unknown error';
+      console.error(code, errorMessage);
+
+      //update the image generation to failed status
+      await ctx.runMutation(
+        internal.video_generations.mutations.update,
+        {
+          externalJobId: taskId,
+          status: 'fail',
+        }
+      );
+
+      const videoGeneration = await ctx.runQuery(
+        internal.video_generations.queries.getByExternalJobId,
+        {
+          externalJobId: taskId,
+        }
+      );
+      if (!videoGeneration) {
+        console.error('Video generation not found', taskId);
+        return new Response('Video generation not found', {
+          status: 400,
+        });
+      }
+
+      // refund the credits to the user
+      await ctx.runMutation(internal.users.refundCredits, {
+        clerkId: videoGeneration.userId,
+        amount: videoGeneration.creditsUsage,
       });
     }
 
