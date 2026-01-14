@@ -1,5 +1,5 @@
 import { VideoGeneratorForm } from '@/components/video-generator/video-generator-form';
-import VideoPreview from '@/components/video-generator/video-preview';
+import { VideoPreviewArea } from '@/components/video-generator/video-preview';
 
 export default function VideoGeneratorPage() {
   return (
@@ -13,7 +13,7 @@ export default function VideoGeneratorPage() {
 
         {/* Right Side */}
         <div className="hidden md:flex flex-1 h-full overflow-y-auto">
-          <VideoPreview />
+          <VideoPreviewArea />
         </div>
       </div>
     </div>
