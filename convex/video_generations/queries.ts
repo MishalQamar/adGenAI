@@ -56,7 +56,6 @@ export const getPaginatedVideos = query({
       uniqueUserIds.map((userId) =>
         ctx.db
           .query('users')
-
           .withIndex('by_clerk_id', (q) => q.eq('clerkId', userId))
           .first()
       )
@@ -64,7 +63,9 @@ export const getPaginatedVideos = query({
 
     //lookup map for access
     const userMap = new Map(
-      users.map((user) => [user!.clerkId, user])
+      users
+        .filter((user): user is NonNullable<typeof user> => user !== null && user !== undefined)
+        .map((user) => [user.clerkId, user])
     );
 
     //combine generations with user details

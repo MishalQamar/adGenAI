@@ -70,7 +70,7 @@ export const uploadImage = internalAction({
     fileName: v.string(),
     folderPath: v.string(),
   },
-  handler: async (ctx, args): Promise<unknown> => {
+  handler: async (ctx, args): Promise<{ url: string }> => {
     const result = await ctx.runAction(
       api.lib.imagekit.uploadImageToImageKit,
       {

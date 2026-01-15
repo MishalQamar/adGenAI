@@ -16,13 +16,13 @@ export const uploadImageToImageKit = action({
     fileName: v.string(),
     folderPath: v.string(),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<{ url: string }> => {
     //upload the image to imagekit
     const result = await imageKit.upload({
       file: args.fileUrl,
       fileName: args.fileName,
       folder: args.folderPath,
     });
-    return result;
+    return { url: result.url };
   },
 });

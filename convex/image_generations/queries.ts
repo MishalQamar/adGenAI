@@ -65,7 +65,9 @@ export const getPaginatedImages = query({
 
     //lookup map for access
     const userMap = new Map(
-      users.map((user) => [user!.clerkId, user])
+      users
+        .filter((user): user is NonNullable<typeof user> => user !== null && user !== undefined)
+        .map((user) => [user.clerkId, user])
     );
 
     //combine generations with user details
