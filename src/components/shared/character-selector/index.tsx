@@ -74,12 +74,12 @@ export function CharacterSelector({
     api.subscriptions.queries.getUserSubscriptions
   );
 
-  if (open && subscription?.subscription?.status !== 'active') {
+  /*  if (open && subscription?.subscription?.status !== 'active') {
     if (subscription === undefined) return null;
     return (
       <CreditsPurchaseModal open={open} onOpenChange={onOpenChange} />
     );
-  }
+  } */
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

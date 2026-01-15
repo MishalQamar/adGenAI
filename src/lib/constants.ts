@@ -11,7 +11,7 @@ export const PRICING_PLANS: PricingPlan[] = [
   {
     name: 'Starter',
     price: '$0 / mo',
-    description: 'Perfect for trying out AI ads',
+    description: 'Perfect for trying out AdGen AI',
     features: [
       '10 AI-generated ads per month',
       'Basic ad templates',

@@ -172,7 +172,7 @@ export default function FooterSection() {
         </div>
         <span className="text-muted-foreground block text-center text-sm">
           {' '}
-          © {new Date().getFullYear()} AI Ad Generator, All rights
+          © {new Date().getFullYear()} AdGen AI, All rights
           reserved
         </span>
       </div>

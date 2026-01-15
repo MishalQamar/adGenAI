@@ -142,7 +142,7 @@ export const ImageGeneratorForm = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 border rounded-md p-4 h-full">
+    <div className="flex flex-col gap-6 rounded-md p-4 h-full">
       <div className="flex flex-col gap-2 ">
         <h2 className="text-2xl font-bold tracking-tight">
           Generate Images

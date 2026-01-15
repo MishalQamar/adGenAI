@@ -112,7 +112,8 @@ function AnimatedGroup({
     item: addDefaultVariants(preset ? presetVariants[preset] : {}),
     container: addDefaultVariants(defaultContainerVariants),
   };
-  const containerVariants = variants?.container || selectedVariants.container;
+  const containerVariants =
+    variants?.container || selectedVariants.container;
   const itemVariants = variants?.item || selectedVariants.item;
 
   const MotionComponent = React.useMemo(
@@ -126,8 +127,8 @@ function AnimatedGroup({
 
   return (
     <MotionComponent
-      initial='hidden'
-      animate='visible'
+      initial="hidden"
+      animate="visible"
       variants={containerVariants}
       className={className}
     >

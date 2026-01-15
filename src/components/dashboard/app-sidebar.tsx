@@ -68,7 +68,7 @@ export function AppSidebar({
               />
             </div>
             <span className="text-lg font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent group-data-[collapsible=icon]:hidden">
-              AdGenie
+              AdGen AI
             </span>
           </div>
         </div>
