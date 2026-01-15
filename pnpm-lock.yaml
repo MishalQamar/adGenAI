@@ -50,9 +50,6 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.2.8
         version: 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      api:
-        specifier: link:@/convex/_generated/api
-        version: link:@/convex/_generated/api
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
