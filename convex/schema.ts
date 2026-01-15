@@ -7,7 +7,10 @@ export default defineSchema({
     email: v.string(),
     name: v.optional(v.string()),
     imageUrl: v.optional(v.string()),
+    polarCustomerId: v.optional(v.string()),
+    subscriptionId: v.optional(v.id('subscriptions')),
     credits: v.optional(v.number()),
+
     updatedAt: v.number(),
   })
     .index('by_clerk_id', ['clerkId'])
@@ -65,4 +68,18 @@ export default defineSchema({
     .index('by_status', ['status'])
     .index('by_created_at', ['createdAt'])
     .index('by_external_job_id', ['externalJobId']),
+
+  subscriptions: defineTable({
+    userId: v.string(),
+    polarSubscriptionId: v.string(),
+    polarCustomerId: v.string(),
+    polarProductId: v.string(),
+    status: v.union(v.literal('active'), v.literal('cancelled')),
+    currentPeriodStart: v.number(),
+    currentPeriodEnd: v.optional(v.number()),
+    cancelAtPeriodEnd: v.boolean(),
+    updatedAt: v.number(),
+  })
+    .index('by_user_id', ['userId'])
+    .index('by_polar_subscription_id', ['polarSubscriptionId']),
 });
