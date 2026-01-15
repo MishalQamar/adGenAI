@@ -28,7 +28,7 @@ export function PricingCard({ plan }: PricingCardProps) {
   const router = useRouter();
   const { isSignedIn } = useUser();
   const generatedCheckoutLink = useAction(
-    api.lib.actions.generateCheckoutLink
+    api['lib/actions'].generateCheckoutLink
   );
 
   const handleCheckout = async () => {
