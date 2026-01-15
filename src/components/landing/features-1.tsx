@@ -8,7 +8,7 @@ export default function Features() {
             <div className="@container mx-auto max-w-5xl px-6">
                 <div className="text-center">
                     <h2 className="text-balance text-4xl font-semibold lg:text-5xl">Everything You Need to Create Winning Ads</h2>
-                    <p className="mt-4">Powerful AI-driven tools that help you create, optimize, and scale your advertising campaigns across all major platforms.</p>
+                    <p className="mt-4">Generate professional ad visuals with AI-powered image and video creation. Create custom characters, generate unlimited variations, and export ready-to-use content for all major advertising platforms.</p>
                 </div>
                 <div className="@min-4xl:max-w-full @min-4xl:grid-cols-3 mx-auto mt-8 grid max-w-sm gap-6 *:text-center md:mt-16">
                     <Card className="group shadow-zinc-950/5">
@@ -20,11 +20,11 @@ export default function Features() {
                                 />
                             </CardDecorator>
 
-                            <h3 className="mt-6 font-medium">AI-Powered Copywriting</h3>
+                            <h3 className="mt-6 font-medium">AI Image Generation</h3>
                         </CardHeader>
 
                         <CardContent>
-                            <p className="text-sm">Generate compelling ad copy in seconds. Our AI understands your brand voice and creates multiple variations optimized for conversions.</p>
+                            <p className="text-sm">Create stunning ad images in seconds using advanced AI models. Generate multiple variations, customize aspect ratios, and use your brand characters to create unique visuals that stand out.</p>
                         </CardContent>
                     </Card>
 
@@ -37,11 +37,11 @@ export default function Features() {
                                 />
                             </CardDecorator>
 
-                            <h3 className="mt-6 font-medium">Multi-Platform Support</h3>
+                            <h3 className="mt-6 font-medium">AI Video Generation</h3>
                         </CardHeader>
 
                         <CardContent>
-                            <p className="mt-3 text-sm">Create ads for Facebook, Instagram, Google Ads, LinkedIn, TikTok, and more. One tool, unlimited platforms.</p>
+                            <p className="mt-3 text-sm">Produce professional video ads with AI. Generate engaging video content that captures attention and drives conversions, all without expensive production costs.</p>
                         </CardContent>
                     </Card>
 
@@ -54,11 +54,11 @@ export default function Features() {
                                 />
                             </CardDecorator>
 
-                            <h3 className="mt-6 font-medium">Smart A/B Testing</h3>
+                            <h3 className="mt-6 font-medium">Character-Based Creation</h3>
                         </CardHeader>
 
                         <CardContent>
-                            <p className="mt-3 text-sm">Automatically test multiple ad variations and let AI identify the highest-performing combinations to maximize your ROI.</p>
+                            <p className="mt-3 text-sm">Build and reuse custom brand characters across all your ads. Create consistent visual identity and generate unlimited variations with your unique characters.</p>
                         </CardContent>
                     </Card>
                 </div>

@@ -131,8 +131,8 @@ export default function HeroSection() {
                 >
                   Create compelling, targeted advertisements for
                   Facebook, Google, Instagram, and more. Let AI handle
-                  the copywriting, design suggestions, and A/B testing
-                  so you can focus on growing your business.
+                  the copywriting and design suggestions so you can
+                  focus on growing your business.
                 </TextEffect>
 
                 <AnimatedGroup
