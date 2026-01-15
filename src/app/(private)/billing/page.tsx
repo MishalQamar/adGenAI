@@ -28,7 +28,7 @@ export default function BillingPage() {
     api.subscriptions.queries.getUserSubscriptions
   );
   const generatedCheckoutLink = useAction(
-    api.lib.polar.generateCheckoutLink
+    api.lib.actions.generateCheckoutLink
   );
   const [isLoading, setIsLoading] = useState(false);
 
